@@ -112,7 +112,7 @@ export default function Experiences() {
                   <h4>{exp.role}</h4>
                 </div>
               </div>
-              <ShinyText text={exp.description} />
+              <ShinyText text={exp.description} className="pl-4 md:pl-0" />
             </div>
           ))}
         </div>

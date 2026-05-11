@@ -91,7 +91,7 @@ export const portfolioData = {
       period: "Dec 2025 - May 2026",
       overview: `SmartFood AI is a full-stack nutrition tracking project that connects a mobile app, backend APIs, AI ingredient classification, and an IoT smart scale. It helps users record meals, calculate calories and nutrition values, follow weight goals, and receive meal suggestions based on personal diet targets. The project covers the full product flow from mobile UI and data management to backend services, deployment, and AI-assisted food analysis.`,
       teamSize: "4 contributors",
-      role: "Fullstack developer, AI ingredient classification",
+      role: "Fullstack developer, AI classification",
       tech: [
         { name: "React Native", icon: "/icons/tech/react.svg" },
         { name: "Expo", icon: "/icons/tech/expo.svg" },
@@ -123,8 +123,7 @@ export const portfolioData = {
           label: "Backend",
           type: "be" as const,
           url: "https://github.com/duyaivy/smart-food-be"
-        },
-
+        }
       ]
     },
     {
@@ -133,7 +132,7 @@ export const portfolioData = {
       period: "Jan 2026 - Apr 2026",
       overview: `VietFood is a restaurant management platform for customer ordering, real-time service tracking, and business operations. Customers can browse menus, place orders, follow dish status, use an AI chatbot for support, and complete payments through VNPay. Admin users can manage menu items, staff, revenue, orders, notifications, multilingual content, SEO, and customer insights from a centralized dashboard.`,
       teamSize: "2 contributors",
-      role: "Fullstack developer, deployment",
+      role: "Fullstack developer",
       tech: [
         { name: "Next.js", icon: "/icons/tech/nextjs.svg" },
         { name: "React.js", icon: "/icons/tech/react.svg" },
@@ -155,24 +154,26 @@ export const portfolioData = {
       ],
       image: "/vietfood.jpg",
       demoLink: "https://restaurant.duyaivy.id.vn/",
-      githubLinks: [{
-        label: "Frontend",
-        type: "fe" as const,
-        url: "https://github.com/duyaivy/RestaurantFE"
-      },
-      {
-        label: "Backend",
-        type: "be" as const,
-        url: "https://github.com/duyaivy/RestaurantBE"
-      }]
+      githubLinks: [
+        {
+          label: "Frontend",
+          type: "fe" as const,
+          url: "https://github.com/duyaivy/RestaurantFE"
+        },
+        {
+          label: "Backend",
+          type: "be" as const,
+          url: "https://github.com/duyaivy/RestaurantBE"
+        }
+      ]
     },
     {
       id: 3,
-      name: "MiniSweeper AI",
+      name: "MineSweeper AI",
       period: "Mar 2026",
-      overview: `MiniSweeper AI is a Minesweeper game project that explores AI-assisted and automated gameplay. It combines classic game mechanics with rule-based reasoning and machine learning models to predict safe moves, suggest hints, and complete boards automatically. The project focuses on practical AI decision-making in an interactive real-time game environment.`,
+      overview: `MineSweeper AI is a Minesweeper game project that explores AI-assisted and automated gameplay. It combines classic game mechanics with rule-based reasoning and machine learning models to predict safe moves, suggest hints, and complete boards automatically. The project focuses on practical AI decision-making in an interactive real-time game environment.`,
       teamSize: "Personal project",
-      role: "Game + AI developer",
+      role: "Game and AI developer",
       tech: [
         { name: "Pygame", icon: "/icons/tech/python.svg" },
         { name: "XGBoost", icon: "/icons/tech/xgboost.svg" },

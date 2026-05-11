@@ -3,19 +3,85 @@
 import { useGSAP } from "@gsap/react";
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/all";
+import { Volume2, VolumeX } from "lucide-react";
 import Image from "next/image";
-import { useRef } from "react";
+import { useCallback, useRef, useState } from "react";
 
 import { portfolioData } from "@/src/data/portfolio";
 
 gsap.registerPlugin(ScrollTrigger, useGSAP);
 
 const { theatreOfDreams: tod } = portfolioData;
+const MUSIC_START_VOLUME = 0.08;
+const MUSIC_NORMAL_VOLUME = 0.82;
 
 export default function TheatreOfDreams() {
   const containerRef = useRef<HTMLDivElement>(null);
   const imageRef = useRef<HTMLDivElement>(null);
   const childImageRef = useRef<HTMLDivElement>(null);
+  const audioRef = useRef<HTMLAudioElement>(null);
+  const musicTweenRef = useRef<gsap.core.Tween | null>(null);
+  const isMusicOffRef = useRef(false);
+  const [isMusicEnabled, setIsMusicEnabled] = useState(true);
+  const [isMusicPlaying, setIsMusicPlaying] = useState(false);
+
+  const playMusic = useCallback(async () => {
+    const audio = audioRef.current;
+
+    if (!audio || isMusicOffRef.current) return;
+
+    musicTweenRef.current?.kill();
+    audio.volume = audio.paused
+      ? MUSIC_START_VOLUME
+      : Math.min(audio.volume, MUSIC_NORMAL_VOLUME);
+
+    try {
+      await audio.play();
+      setIsMusicPlaying(true);
+      musicTweenRef.current = gsap.to(audio, {
+        volume: MUSIC_NORMAL_VOLUME,
+        duration: 3.6,
+        ease: "power2.out",
+        overwrite: true
+      });
+    } catch {
+      setIsMusicPlaying(false);
+    }
+  }, []);
+
+  const stopMusic = useCallback((markAsOff = true) => {
+    const audio = audioRef.current;
+
+    if (markAsOff) {
+      isMusicOffRef.current = true;
+      setIsMusicEnabled(false);
+    }
+
+    if (!audio) return;
+
+    musicTweenRef.current?.kill();
+    setIsMusicPlaying(false);
+    musicTweenRef.current = gsap.to(audio, {
+      volume: 0,
+      duration: 0.7,
+      ease: "power2.out",
+      overwrite: true,
+      onComplete: () => {
+        audio.pause();
+      }
+    });
+  }, []);
+
+  const toggleMusic = useCallback(() => {
+    if (isMusicEnabled) {
+      stopMusic();
+      return;
+    }
+
+    isMusicOffRef.current = false;
+    setIsMusicEnabled(true);
+    void playMusic();
+  }, [isMusicEnabled, playMusic, stopMusic]);
 
   useGSAP(
     () => {
@@ -77,8 +143,24 @@ export default function TheatreOfDreams() {
           }
         );
       }
+
+      ScrollTrigger.create({
+        trigger: containerRef.current,
+        start: "top 85%",
+        end: "bottom top",
+        invalidateOnRefresh: true,
+        onEnter: () => void playMusic(),
+        onEnterBack: () => void playMusic(),
+        onLeave: () => stopMusic(false),
+        onLeaveBack: () => stopMusic(false)
+      });
+
+      return () => {
+        musicTweenRef.current?.kill();
+        audioRef.current?.pause();
+      };
     },
-    { scope: containerRef }
+    { scope: containerRef, dependencies: [playMusic, stopMusic] }
   );
 
   return (
@@ -141,6 +223,42 @@ export default function TheatreOfDreams() {
           </div>
         </div>
       </div>
+
+      <audio ref={audioRef} src="/manchester_united.mp3" loop preload="auto" />
+
+      <button
+        type="button"
+        onClick={toggleMusic}
+        aria-label={isMusicEnabled ? "Turn off music" : "Turn on music"}
+        aria-pressed={isMusicEnabled}
+        className={`group absolute bottom-6 right-5 z-20 grid size-[3.75rem] place-items-center overflow-hidden rounded-full border text-white shadow-[0_16px_42px_rgba(0,0,0,0.42)] backdrop-blur-md transition duration-500 hover:scale-105 focus:outline-none focus:ring-2 focus:ring-primary/70 sm:bottom-8 sm:right-8 sm:size-[4.25rem] ${
+          isMusicEnabled
+            ? "border-primary/70 bg-primary/20 hover:border-[#ffc72c]/80"
+            : "border-white/20 bg-[#181818]/50 hover:border-white/45 hover:bg-white/10"
+        }`}
+      >
+        <span
+          className={`absolute inset-[-35%] rounded-full bg-[conic-gradient(from_0deg,rgba(218,41,28,0),rgba(218,41,28,0.85),rgba(255,199,44,0.75),rgba(218,41,28,0))] opacity-70 blur-[1px] transition duration-500 ${
+            isMusicEnabled ? "animate-spin [animation-duration:8s]" : "opacity-20"
+          }`}
+        />
+        <span className="absolute inset-0 bg-[radial-gradient(circle_at_28%_20%,rgba(255,255,255,0.24),transparent_32%),radial-gradient(circle_at_68%_78%,rgba(255,199,44,0.32),transparent_45%),linear-gradient(145deg,rgba(24,24,24,0.2),rgba(24,24,24,0.78))]" />
+        {isMusicEnabled && (
+          <span className="absolute inset-1 rounded-full border border-primary/55 shadow-[0_0_28px_rgba(218,41,28,0.5)] animate-pulse" />
+        )}
+        <span className="absolute inset-[6px] rounded-full border border-white/15" />
+        <span className="relative grid size-10 place-items-center rounded-full bg-black/35 shadow-inner shadow-white/10 sm:size-11">
+          {isMusicEnabled ? (
+            <Volume2
+              className={`size-5 text-[#ffc72c] drop-shadow-[0_0_10px_rgba(255,199,44,0.8)] transition duration-300 sm:size-6 ${
+                isMusicPlaying ? "scale-110" : ""
+              }`}
+            />
+          ) : (
+            <VolumeX className="size-5 text-white/85 sm:size-6" />
+          )}
+        </span>
+      </button>
     </section>
   );
 }

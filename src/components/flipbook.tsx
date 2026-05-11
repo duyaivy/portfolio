@@ -19,24 +19,47 @@ gsap.registerPlugin(ScrollTrigger, useGSAP);
 const { projects } = portfolioData;
 const TOC_PAGE = 1;
 const PROJECT_START_PAGE = 2;
+const MOBILE_BREAKPOINT = 767;
+const MOBILE_BOOK_MIN_HEIGHT = 560;
+const MOBILE_BOOK_MAX_HEIGHT = 760;
+const MOBILE_BOOK_HEIGHT_RATIO = 0.78;
 
 export default function Flipbook() {
   const wrapperRef = useRef<HTMLDivElement>(null);
   const bookRef = useRef<any>(null);
   const [currentPage, setCurrentPage] = useState(0);
   const [isMobile, setIsMobile] = useState(false);
+  const [mobileBookHeight, setMobileBookHeight] = useState(620);
 
   useEffect(() => {
-    const mediaQuery = window.matchMedia("(max-width: 767px)");
-    const updateViewport = () => setIsMobile(mediaQuery.matches);
+    const mediaQuery = window.matchMedia(`(max-width: ${MOBILE_BREAKPOINT}px)`);
+    const updateViewport = () => {
+      setIsMobile(mediaQuery.matches);
+      setMobileBookHeight(
+        Math.round(
+          Math.min(
+            Math.max(
+              window.innerHeight * MOBILE_BOOK_HEIGHT_RATIO,
+              MOBILE_BOOK_MIN_HEIGHT
+            ),
+            MOBILE_BOOK_MAX_HEIGHT
+          )
+        )
+      );
+    };
 
     updateViewport();
     mediaQuery.addEventListener("change", updateViewport);
+    window.addEventListener("resize", updateViewport);
 
     return () => {
       mediaQuery.removeEventListener("change", updateViewport);
+      window.removeEventListener("resize", updateViewport);
     };
   }, []);
+
+  const bookWidth = isMobile ? 340 : 520;
+  const bookHeight = isMobile ? mobileBookHeight : 660;
 
   useGSAP(
     () => {
@@ -85,12 +108,12 @@ export default function Flipbook() {
             <HTMLFlipBook
               key={isMobile ? "mobile-book" : "desktop-book"}
               ref={bookRef}
-              width={isMobile ? 340 : 520}
-              height={isMobile ? 520 : 660}
+              width={bookWidth}
+              height={bookHeight}
               size="stretch"
               minWidth={280}
               maxWidth={720}
-              minHeight={380}
+              minHeight={isMobile ? MOBILE_BOOK_MIN_HEIGHT : 380}
               maxHeight={860}
               showCover={false}
               flippingTime={700}
@@ -151,10 +174,11 @@ export default function Flipbook() {
                       <li key={p.id}>
                         <button
                           onClick={() => flipToProject(i)}
-                          className={`group flex w-full items-center justify-between border-t border-[#3b3b3b] py-5 text-left transition-colors ${activeProjectIdx === i
-                            ? "text-primary"
-                            : "text-white hover:text-primary"
-                            }`}
+                          className={`group flex w-full items-center justify-between border-t border-[#3b3b3b] py-5 text-left transition-colors ${
+                            activeProjectIdx === i
+                              ? "text-primary"
+                              : "text-white hover:text-primary"
+                          }`}
                         >
                           <div className="flex min-w-0 items-center gap-4">
                             <span className="w-6 text-xs font-bold tracking-[1.4px] text-[#777777]">

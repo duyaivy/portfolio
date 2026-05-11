@@ -14,7 +14,7 @@ export const metadata: Metadata = {
   },
   description:
     "Portfolio of Quoc Duy, a 3rd-year Full Stack Developer student at DUT. Specializing in React, Next.js, and modern web solutions.",
-  metadataBase: new URL("https://duyaivy.id.vn"),
+  metadataBase: new URL("https://www.duyaivy.id.vn"),
   alternates: {
     canonical: "/"
   }
