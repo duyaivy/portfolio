@@ -1,0 +1,9 @@
+# *
+User-agent: *
+Allow: /
+
+# Host
+Host: https://duyaivy.id.vn
+
+# Sitemaps
+Sitemap: https://duyaivy.id.vn/sitemap.xml

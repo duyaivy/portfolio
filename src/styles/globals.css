@@ -1,0 +1,224 @@
+@import "tailwindcss";
+@import "tw-animate-css";
+@import "./Career.css";
+
+@custom-variant dark (&:is(.dark *));
+
+*,
+body {
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+  cursor: none;
+}
+
+html,
+body {
+  max-width: 100%;
+  overflow-x: clip;
+}
+
+@theme {
+  --color-primary: #da291c;
+  --color-primary-active: #b01e0a;
+  --color-primary-hover: #9d2211;
+  --color-canvas: #181818;
+  --color-canvas-elevated: #303030;
+  --color-canvas-light: #ffffff;
+  --color-hairline: #303030;
+  --color-body: #969696;
+  --color-muted: #666666;
+  --color-border: #303030;
+  --color-ring: #da291c;
+  --color-background: #181818;
+  --color-foreground: #ffffff;
+  --color-card: #303030;
+  --color-card-foreground: #ffffff;
+
+  --spacing-xxxs: 4px;
+  --spacing-xxs: 8px;
+  --spacing-xs: 16px;
+  --spacing-sm: 24px;
+  --spacing-md: 32px;
+  --spacing-lg: 48px;
+  --spacing-xl: 64px;
+  --spacing-xxl: 96px;
+  --spacing-super: 128px;
+
+  --animate-shine: shine 2s linear infinite;
+
+  @keyframes shine {
+    0% {
+      background-position: 100%;
+    }
+    100% {
+      background-position: -100%;
+    }
+  }
+}
+
+:root {
+  --radius: 0px;
+  --background: #181818;
+  --foreground: #ffffff;
+  --card: #303030;
+  --card-foreground: #ffffff;
+  --primary: #da291c;
+  --primary-foreground: #ffffff;
+  --border: #303030;
+  --input: #303030;
+  --ring: #da291c;
+
+  /* Typography Tokens */
+  --display-mega: 5rem; /* 80px */
+  --display-xl: 3.5rem; /* 56px */
+  --display-lg: 2.25rem; /* 36px */
+  --display-md: 1.625rem; /* 26px */
+  --title-md: 1.125rem; /* 18px */
+  --title-sm: 1rem; /* 16px */
+  --body-md: 0.875rem; /* 14px */
+  --body-sm: 0.8125rem; /* 13px */
+  --caption: 0.75rem; /* 12px */
+  --caption-up: 0.6875rem; /* 11px */
+}
+
+@layer base {
+  * {
+    @apply border-border outline-ring/50;
+  }
+  body {
+    @apply bg-background text-foreground font-sans antialiased;
+    font-family:
+      "Inter",
+      -apple-system,
+      BlinkMacSystemFont,
+      "Segoe UI",
+      Roboto,
+      sans-serif;
+  }
+
+  a,
+  button {
+    @apply transition-colors;
+  }
+
+  a:hover,
+  button:hover {
+    color: var(--primary);
+  }
+
+  h1 {
+    @apply text-[length:var(--display-mega)] leading-[1.05] font-medium tracking-[-1.6px];
+  }
+  h2 {
+    @apply text-[length:var(--display-xl)] leading-[1.1] font-medium tracking-[-1.12px];
+  }
+  h3 {
+    @apply text-[length:var(--display-lg)] leading-[1.2] font-medium tracking-[-0.36px];
+  }
+
+  ::-webkit-scrollbar {
+    display: none;
+  }
+}
+
+/* Global Container Utility */
+.container {
+  width: 100%;
+  box-sizing: border-box;
+  margin-left: auto;
+  margin-right: auto;
+  max-width: 1280px;
+  padding-left: 1rem;
+  padding-right: 1rem;
+}
+
+@media (min-width: 640px) {
+  .container {
+    padding-left: 1.5rem;
+    padding-right: 1.5rem;
+  }
+}
+
+@media (min-width: 768px) {
+  .container {
+    padding-left: 2.5rem; /* px-10 */
+    padding-right: 2.5rem;
+  }
+}
+
+@media (min-width: 1024px) {
+  .container {
+    padding-left: 4rem; /* px-16 */
+    padding-right: 4rem;
+  }
+}
+
+@layer utilities {
+  .text-display-mega {
+    font-size: var(--display-mega);
+    font-weight: 500;
+    line-height: 1.05;
+    letter-spacing: -1.6px;
+  }
+  .text-display-xl {
+    font-size: var(--display-xl);
+    font-weight: 500;
+    line-height: 1.1;
+    letter-spacing: -1.12px;
+  }
+  .text-display-lg {
+    font-size: var(--display-lg);
+    font-weight: 500;
+    line-height: 1.2;
+    letter-spacing: -0.36px;
+  }
+  .text-display-md {
+    font-size: var(--display-md);
+    font-weight: 500;
+    line-height: 1.5;
+    letter-spacing: 0.195px;
+  }
+  .text-body-md {
+    font-size: var(--body-md);
+    font-weight: 400;
+    line-height: 1.5;
+  }
+  .text-caption-uppercase {
+    font-size: var(--caption-up);
+    font-weight: 600;
+    line-height: 1.4;
+    letter-spacing: 1.1px;
+    text-transform: uppercase;
+  }
+  .btn-label {
+    font-size: 0.875rem;
+    font-weight: 700;
+    line-height: 1;
+    letter-spacing: 1.4px;
+    text-transform: uppercase;
+  }
+
+  /* Flipbook Styles */
+  .portfolio-book {
+    box-shadow: 0 0 50px rgba(0, 0, 0, 0.5);
+  }
+
+  .stf__parent {
+    perspective: 3000px;
+  }
+
+  .stf__block {
+    background-color: #303030;
+  }
+
+  input:-webkit-autofill,
+  input:-webkit-autofill:hover,
+  input:-webkit-autofill:focus,
+  input:-webkit-autofill:active {
+    @apply rounded-none border border-gray-500 bg-black text-white;
+    -webkit-box-shadow: 0 0 0 1000px #000 inset;
+    -webkit-text-fill-color: #fff;
+    caret-color: #fff;
+    transition: background-color 5000s ease-in-out 0s;
+  }
+}
