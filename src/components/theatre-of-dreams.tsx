@@ -5,9 +5,14 @@ import gsap from "gsap";
 import { ScrollTrigger } from "gsap/all";
 import { Volume2, VolumeX } from "lucide-react";
 import Image from "next/image";
-import { useCallback, useRef, useState } from "react";
+import { useCallback, useEffect, useRef, useState } from "react";
 
 import { portfolioData } from "@/src/data/portfolio";
+import {
+  ensureNotificationAudio,
+  isSharedAudioUnlocked,
+  SHARED_AUDIO_UNLOCKED_EVENT
+} from "@/src/lib/shared-audio";
 
 gsap.registerPlugin(ScrollTrigger, useGSAP);
 
@@ -19,16 +24,38 @@ export default function TheatreOfDreams() {
   const containerRef = useRef<HTMLDivElement>(null);
   const imageRef = useRef<HTMLDivElement>(null);
   const childImageRef = useRef<HTMLDivElement>(null);
-  const audioRef = useRef<HTMLAudioElement>(null);
+  const musicAudioRef = useRef<HTMLAudioElement | null>(null);
   const musicTweenRef = useRef<gsap.core.Tween | null>(null);
+  const isInTheatreRef = useRef(false);
   const isMusicOffRef = useRef(false);
   const [isMusicEnabled, setIsMusicEnabled] = useState(true);
   const [isMusicPlaying, setIsMusicPlaying] = useState(false);
 
-  const playMusic = useCallback(async () => {
-    const audio = audioRef.current;
+  const getMusicAudio = useCallback(() => {
+    const audio = ensureNotificationAudio();
+    const musicSrc = new URL("/manchester_united.mp3", window.location.href)
+      .href;
 
-    if (!audio || isMusicOffRef.current) return;
+    if (audio.src !== musicSrc) {
+      audio.src = musicSrc;
+    }
+
+    audio.loop = true;
+    audio.preload = "auto";
+    musicAudioRef.current = audio;
+
+    return audio;
+  }, []);
+
+  const playMusic = useCallback(async () => {
+    if (isMusicOffRef.current) return;
+
+    if (!isSharedAudioUnlocked()) {
+      setIsMusicPlaying(false);
+      return;
+    }
+
+    const audio = getMusicAudio();
 
     musicTweenRef.current?.kill();
     audio.volume = audio.paused
@@ -47,10 +74,10 @@ export default function TheatreOfDreams() {
     } catch {
       setIsMusicPlaying(false);
     }
-  }, []);
+  }, [getMusicAudio]);
 
   const stopMusic = useCallback((markAsOff = true) => {
-    const audio = audioRef.current;
+    const audio = musicAudioRef.current;
 
     if (markAsOff) {
       isMusicOffRef.current = true;
@@ -82,6 +109,25 @@ export default function TheatreOfDreams() {
     setIsMusicEnabled(true);
     void playMusic();
   }, [isMusicEnabled, playMusic, stopMusic]);
+
+  useEffect(() => {
+    const handleAudioUnlocked = () => {
+      if (!isInTheatreRef.current || isMusicOffRef.current) {
+        return;
+      }
+
+      void playMusic();
+    };
+
+    window.addEventListener(SHARED_AUDIO_UNLOCKED_EVENT, handleAudioUnlocked);
+
+    return () => {
+      window.removeEventListener(
+        SHARED_AUDIO_UNLOCKED_EVENT,
+        handleAudioUnlocked
+      );
+    };
+  }, [playMusic]);
 
   useGSAP(
     () => {
@@ -149,15 +195,27 @@ export default function TheatreOfDreams() {
         start: "top 85%",
         end: "bottom top",
         invalidateOnRefresh: true,
-        onEnter: () => void playMusic(),
-        onEnterBack: () => void playMusic(),
-        onLeave: () => stopMusic(false),
-        onLeaveBack: () => stopMusic(false)
+        onEnter: () => {
+          isInTheatreRef.current = true;
+          void playMusic();
+        },
+        onEnterBack: () => {
+          isInTheatreRef.current = true;
+          void playMusic();
+        },
+        onLeave: () => {
+          isInTheatreRef.current = false;
+          stopMusic(false);
+        },
+        onLeaveBack: () => {
+          isInTheatreRef.current = false;
+          stopMusic(false);
+        }
       });
 
       return () => {
         musicTweenRef.current?.kill();
-        audioRef.current?.pause();
+        musicAudioRef.current?.pause();
       };
     },
     { scope: containerRef, dependencies: [playMusic, stopMusic] }
@@ -223,8 +281,6 @@ export default function TheatreOfDreams() {
           </div>
         </div>
       </div>
-
-      <audio ref={audioRef} src="/manchester_united.mp3" loop preload="auto" />
 
       <button
         type="button"
