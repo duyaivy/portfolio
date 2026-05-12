@@ -3,7 +3,8 @@
 import { useGSAP } from "@gsap/react";
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/all";
-import { useRef } from "react";
+import { FormEvent, useRef, useState } from "react";
+import { toast } from "sonner";
 
 import Button from "@/src/components/button";
 import Magnet from "@/src/components/magnet";
@@ -15,6 +16,49 @@ gsap.registerPlugin(ScrollTrigger, useGSAP);
 export default function ContactMe() {
   const containerRef = useRef<HTMLDivElement>(null);
   const bgWordRef = useRef<HTMLDivElement>(null);
+  const [name, setName] = useState("");
+  const [email, setEmail] = useState("");
+  const [message, setMessage] = useState("");
+  const [isSubmitting, setIsSubmitting] = useState(false);
+
+  const handleSubmit = async (event: FormEvent<HTMLFormElement>) => {
+    event.preventDefault();
+
+    if (isSubmitting) {
+      return;
+    }
+
+    setIsSubmitting(true);
+
+    try {
+      const response = await fetch("/api/contact", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json"
+        },
+        body: JSON.stringify({ name, email, message })
+      });
+
+      const result = (await response.json()) as { error?: string };
+
+      if (!response.ok) {
+        throw new Error(result.error ?? "Unable to send your message.");
+      }
+
+      setName("");
+      setEmail("");
+      setMessage("");
+      toast.success("Message sent. Please check your inbox.");
+    } catch (error) {
+      toast.error(
+        error instanceof Error
+          ? error.message
+          : "Unable to send your message right now."
+      );
+    } finally {
+      setIsSubmitting(false);
+    }
+  };
 
   useGSAP(
     () => {
@@ -140,36 +184,68 @@ export default function ContactMe() {
           </div>
 
           <div className="md:col-span-7 contact-form">
-            <form className="space-y-8 bg-[#303030] p-10 border border-[#303030]">
+            <form
+              className="space-y-8 bg-[#303030] p-10 border border-[#303030]"
+              onSubmit={handleSubmit}
+            >
               <div className="grid md:grid-cols-2 gap-8">
                 <div className="space-y-2">
-                  <label className="text-xs uppercase tracking-[2px] text-gray-400 font-bold">
+                  <label
+                    htmlFor="contact-name"
+                    className="text-xs uppercase tracking-[2px] text-gray-400 font-bold"
+                  >
                     Your Name
                   </label>
                   <input
+                    id="contact-name"
                     type="text"
+                    name="name"
                     placeholder="Cristiano Ronaldo"
+                    value={name}
+                    onChange={(event) => setName(event.target.value)}
+                    required
+                    maxLength={120}
+                    autoComplete="name"
                     className="w-full bg-[#181818] border-none p-4 text-white focus:ring-1 focus:ring-primary outline-none transition-all"
                   />
                 </div>
                 <div className="space-y-2">
-                  <label className="text-xs uppercase tracking-[2px] text-gray-400 font-bold">
+                  <label
+                    htmlFor="contact-email"
+                    className="text-xs uppercase tracking-[2px] text-gray-400 font-bold"
+                  >
                     Your Email
                   </label>
                   <input
+                    id="contact-email"
                     type="email"
+                    name="email"
                     placeholder="ronaldo@example.com"
+                    value={email}
+                    onChange={(event) => setEmail(event.target.value)}
+                    required
+                    maxLength={180}
+                    autoComplete="email"
                     className="w-full bg-[#181818] border-none p-4 text-white focus:ring-1 focus:ring-primary outline-none transition-all"
                   />
                 </div>
               </div>
               <div className="space-y-2">
-                <label className="text-xs uppercase tracking-[2px] text-gray-400 font-bold">
+                <label
+                  htmlFor="contact-message"
+                  className="text-xs uppercase tracking-[2px] text-gray-400 font-bold"
+                >
                   Message
                 </label>
                 <textarea
+                  id="contact-message"
+                  name="message"
                   rows={5}
                   placeholder="Let's build something amazing together..."
+                  value={message}
+                  onChange={(event) => setMessage(event.target.value)}
+                  required
+                  maxLength={4000}
                   className="w-full bg-[#181818] border-none p-4 text-white focus:ring-1 focus:ring-primary outline-none transition-all resize-none"
                 ></textarea>
               </div>
@@ -177,12 +253,12 @@ export default function ContactMe() {
               <Magnet magnetStrength={2}>
                 <Button
                   as="button"
-                  type="button"
+                  type="submit"
+                  disabled={isSubmitting}
                   variant="primary"
-                  className="w-full md:w-auto px-12 py-4 bg-primary text-white uppercase tracking-[2px] font-bold text-sm border-none"
-                  onClick={() => alert("Mock submission successful!")}
+                  className="w-full md:w-auto px-12 py-4 bg-primary text-white uppercase tracking-[2px] font-bold text-sm border-none disabled:cursor-not-allowed disabled:opacity-60"
                 >
-                  Send Message
+                  {isSubmitting ? "Sending..." : "Send Message"}
                 </Button>
               </Magnet>
             </form>
