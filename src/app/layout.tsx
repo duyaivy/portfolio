@@ -1,4 +1,5 @@
 import { Analytics } from "@vercel/analytics/next";
+import { SpeedInsights } from "@vercel/speed-insights/next";
 import "lenis/dist/lenis.css";
 import { ReactLenis } from "lenis/react";
 import type { Metadata } from "next";
@@ -27,9 +28,7 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en" className="dark">
-      <body
-        className="relative overflow-x-clip bg-[#181818] font-sans text-white antialiased select-none"
-      >
+      <body className="relative overflow-x-clip bg-[#181818] font-sans text-white antialiased select-none">
         <ReactLenis
           root
           options={{
@@ -43,6 +42,7 @@ export default function RootLayout({
           </main>
         </ReactLenis>
         <Analytics />
+        <SpeedInsights />
       </body>
     </html>
   );
