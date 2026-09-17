@@ -166,6 +166,19 @@ export default function ContactMe() {
                   {personalInfo.email}
                 </a>
               </div>
+              {personalInfo.phone && (
+                <div>
+                  <p className="text-xs uppercase tracking-[2px] text-gray-300 font-bold mb-2">
+                    Phone
+                  </p>
+                  <a
+                    href={`tel:${personalInfo.phone.replace(/\./g, "")}`}
+                    className="text-xl text-white hover:text-primary transition-colors"
+                  >
+                    {personalInfo.phone}
+                  </a>
+                </div>
+              )}
             </div>
 
             <div className="flex gap-6 mt-12">
@@ -220,7 +233,7 @@ export default function ContactMe() {
                     id="contact-email"
                     type="email"
                     name="email"
-                    placeholder="ronaldo@example.com"
+                    placeholder="your-email@gmail.com"
                     value={email}
                     onChange={(event) => setEmail(event.target.value)}
                     required

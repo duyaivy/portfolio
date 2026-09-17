@@ -214,7 +214,10 @@ export default function Flipbook() {
                     <h3 className="mb-8 text-3xl font-medium uppercase leading-tight tracking-tight text-white">
                       {p.name}
                     </h3>
-                    <ShinyText text={p.overview} />
+                    <ShinyText
+                      text={p.overview}
+                      className="text-xs sm:text-sm leading-relaxed"
+                    />
                   </div>
 
                   <div className="space-y-5 border-t border-[#303030] pt-6 mt-6">

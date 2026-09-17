@@ -3,44 +3,60 @@ export const portfolioData = {
     name: "Nguyen Quoc Duy",
     handle: "duyaivy",
     title: "Full Stack Developer",
-    institution: "Da Nang University of Science and Technology",
-    status: "3rd-year student",
-    focus: "React / Next.js / Node.js / APIs",
+    institution: "Da Nang University of Science and Technology (DUT)",
+    status: "Software Engineering • GPA 3.83 / 4.0",
+    focus: "React.js / Next.js / Nest.js / Node.js",
     availability: "Open",
-    bio: "A Full Stack Developer focused on building complete web/app products, from polished React to Next.js and React Native interfaces to reliable backend APIs, databases, and deployment workflows.",
+    bio: "Software Engineering student with hands-on experience through internship and team projects. Experienced in developing, debugging, testing, and deploying software in collaborative environments.",
     mission:
-      "I turn ideas into fast, practical products with thoughtful UI, stable backend logic, clean data flow, and a focus on real user experience.",
+      "Interested in problem solving, continuous learning, and adapting to new technologies, with a focus on building reliable software and using AI tools effectively to support the development process.",
     resumeUrl: "/resume.pdf",
-    email: "duyaivy.dev@gmail.com",
-    phone: "+84 123 456 789",
+    email: "quocduy0322@gmail.com",
+    phone: "0979.783.396",
     socials: [
       { name: "GitHub", url: "https://github.com/duyaivy" },
       { name: "LinkedIn", url: "https://linkedin.com/in/duyaivy" },
-      { name: "Facebook", url: "https://facebook.com/duyaivy" }
+      { name: "Facebook", url: "https://www.facebook.com/quoc.duy.0322/" }
     ],
     avatar: "/avatar.jpg",
     backgroundWord: "duyaivy"
   },
   experiences: [
     {
-      period: "Nov 2025 - Feb 2025",
-      organization: "AIAIVN",
+      period: "Nov 2025 - Feb 2026",
+      organization: "AIAIVN - Vietnam Artificial Intelligence JSC",
       organizationUrl: "https://www.aiaivn.com/",
       role: "Intern Frontend Developer",
-      description: `As an Intern at AIAIVN, I had the opportunity to learn and work with modern technologies while participating in real-world projects. During my internship, I was involved in projects such as HeriStepAI GPS, HeriStepAI Beacon, and Website Payment, contributing to development tasks, problem-solving, and system improvement. This role strengthened my technical skills, gave me hands-on experience, and improved teamwork and professional working practices.`
+      description: `Contributed to HeriStepAI GPS by fixing bugs and implementing features for real-world deployments in Hoi An and Da Nang New Year Marathon 2025–2026. Worked with HeriStepAI Beacon and supported deployment at Da Nang Museum of Cham Sculpture. Built Website Payment to support ticket purchasing flows redirected from HeriStepAI GPS, collaborating within an active software development workflow.`,
+      bullets: [
+        "Contributed to HeriStepAI GPS by fixing bugs and implementing features for real-world deployments in Hoi An and Da Nang New Year Marathon 2025–2026.",
+        "Learned and worked with the existing HeriStepAI Beacon and supported project deployment at the Da Nang Museum of Cham Sculpture.",
+        "Built Website Payment, a web application supporting ticket purchasing flow by redirecting users from the HeriStepAI GPS platform to complete payment.",
+        "Worked within an existing software development workflow involving task coordination, bug fixing, feature development, testing, and deployment support."
+      ]
     },
     {
-      period: "2024 - Present",
-      organization: "Google Developer Groups On Campus - DUT",
+      period: "Sep 2024 - Sep 2026",
+      organization: "GDGoC DUT - Google Developer Groups On Campus DUT",
       organizationUrl: "https://www.facebook.com/gdgoc.dut/",
-      role: "Frontend Developer",
-      description: `I am a member of a Community Technology Club, a nonprofit organization developing technology products to support learning and benefit the student community. In the club, I share technical knowledge, participate in coding internal projects, and help create mini-games such as lucky wheel and flip card to enhance engagement and club activities.`
+      role: "Frontend Developer — Student Community",
+      description: `Shared technical knowledge and supported peer learning within the student technology community. Developed interactive mini-games such as Lucky Wheel and Memory Matching Game to increase engagement during club events and activities. Collaborated with club members on community technology projects and tech competitions.`,
+      bullets: [
+        "Shared technical knowledge and supported peer learning within the student technology community.",
+        "Developed interactive mini games such as Lucky Wheel, Memory Matching Game to increase engagement during club events and activities.",
+        "Collaborated with club members on technology projects for learning, community-oriented initiatives, and participation in hackathons and competitions."
+      ]
     },
     {
       period: "2025",
       organization: "Freelance Projects",
       role: "Full Stack Developer / Content Creator",
-      description: `I provided support for student assignments and projects, including converting Figma designs to HTML/CSS/JS, coding exercises in OOP and data structures, and assisting with project development. Additionally, I created SEO content for e-commerce websites.`
+      description: `I provided support for student assignments and projects, including converting Figma designs to HTML/CSS/JS, coding exercises in OOP and data structures, and assisting with project development. Additionally, I created SEO content for e-commerce websites.`,
+      bullets: [
+        "Supported student assignments and projects by converting Figma UI designs into responsive, clean HTML/CSS/JS and React interfaces.",
+        "Implemented programming exercises and algorithmic solutions focusing on OOP and core data structures.",
+        "Produced search-engine-optimized (SEO) content for e-commerce websites to enhance discoverability and reach."
+      ]
     }
   ],
   techStack: {
@@ -60,7 +76,8 @@ export const portfolioData = {
     ],
     backend: [
       { name: "Node.js", icon: "/icons/tech/nodejs.svg" },
-      { name: "Express", icon: "/icons/tech/express.svg" },
+      { name: "Express.js", icon: "/icons/tech/express.svg" },
+      { name: "Nest.js", icon: "/icons/tech/nest.svg" },
       { name: "Python", icon: "/icons/tech/python.svg" },
       { name: "MongoDB", icon: "/icons/tech/mongodb.svg" },
       { name: "PostgreSQL", icon: "/icons/tech/postgresql.svg" },
@@ -77,42 +94,72 @@ export const portfolioData = {
       { name: "Git", icon: "/icons/tech/git.svg" },
       { name: "GitHub", icon: "/icons/tech/github.svg" },
       { name: "Docker", icon: "/icons/tech/docker.svg" },
+      { name: "Nginx", icon: "/icons/tech/nginx.svg" },
+      { name: "k6", icon: "/icons/tech/k6.svg" },
+      { name: "AWS", icon: "/icons/tech/aws.svg" },
       { name: "Figma", icon: "/icons/tech/figma.svg" },
       { name: "Vercel", icon: "/icons/tech/vercel.svg" },
-      { name: "AWS", icon: "/icons/tech/aws.svg" },
-      { name: "Nginx", icon: "/icons/tech/nginx.svg" },
       { name: "VS Code", icon: "/icons/tech/vscode.svg" }
     ]
   },
   projects: [
     {
       id: 1,
+      name: "ShortLink Tool",
+      period: "Oct 2025 - Dec 2025",
+      overview: `Scalable URL Shortener System built for high-throughput redirect performance:
+• Base62 encoding with Key Generation Service (KGS) to eliminate collisions.
+• Multi-layer Redis caching & rate limiting for fast HTTP 302 redirects.
+• Asynchronous click analytics pipeline with background batch persistence.
+• Fully containerized with Docker, Nginx reverse proxy, and GitHub Actions CI/CD.`,
+      teamSize: "Personal project",
+      role: "Fullstack developer / DevOps",
+      tech: [
+        { name: "React.js", icon: "/icons/tech/react.svg" },
+        { name: "Nest.js", icon: "/icons/tech/nest.svg" },
+        { name: "MongoDB", icon: "/icons/tech/mongodb.svg" },
+        { name: "Redis", icon: "/icons/tech/redis.svg" },
+        { name: "Docker", icon: "/icons/tech/docker.svg" },
+        { name: "Nginx", icon: "/icons/tech/nginx.svg" },
+        { name: "k6", icon: "/icons/tech/k6.svg" }
+      ],
+      image: "/shortlink.jpg",
+      demoLink: "https://url.duyaivy.id.vn/",
+      githubLinks: [
+        {
+          label: "Frontend",
+          type: "fe" as const,
+          url: "https://github.com/duyaivy/SHORTEN_URL_FRONTEND"
+        },
+        {
+          label: "Backend",
+          type: "be" as const,
+          url: "https://github.com/duyaivy/SHORTEN_URL"
+        }
+      ]
+    },
+    {
+      id: 2,
       name: "SmartFood AI",
-      period: "Dec 2025 - May 2026",
-      overview: `SmartFood AI is a full-stack nutrition tracking project that connects a mobile app, backend APIs, AI ingredient classification, and an IoT smart scale. It helps users record meals, calculate calories and nutrition values, follow weight goals, and receive meal suggestions based on personal diet targets. The project covers the full product flow from mobile UI and data management to backend services, deployment, and AI-assisted food analysis.`,
+      period: "Dec 2025 - Apr 2026",
+      overview: `Full-stack nutrition platform combining AI food recognition, weight-based calorie estimation, and personalized meal recommendations:
+• Cross-platform mobile app with push notifications and personalized targets.
+• Backend APIs with authentication, Redis caching, and PostgreSQL persistence.
+• Real-time MQTT communication integrated with an IoT smart scale.`,
       teamSize: "4 contributors",
-      role: "Fullstack developer, AI classification",
+      role: "Fullstack developer",
       tech: [
         { name: "React Native", icon: "/icons/tech/react.svg" },
         { name: "Expo", icon: "/icons/tech/expo.svg" },
-        { name: "Moti", icon: "/icons/tech/motion.svg" },
-        { name: "Zustand", icon: "/icons/tech/zustand.svg" },
-        { name: "TanStack Query", icon: "/icons/tech/tanstack-query.svg" },
-        { name: "Tailwind CSS", icon: "/icons/tech/tailwindcss.svg" },
-        {
-          name: "Firebase Push Notification",
-          icon: "/icons/tech/firebase.svg"
-        },
-        { name: "ExpressJS", icon: "/icons/tech/express.svg" },
-        { name: "JWT", icon: "/icons/tech/jwt.svg" },
-        { name: "MQTT", icon: "/icons/tech/mqtt.svg" },
+        { name: "Express.js", icon: "/icons/tech/express.svg" },
+        { name: "PostgreSQL", icon: "/icons/tech/postgresql.svg" },
         { name: "Redis", icon: "/icons/tech/redis.svg" },
-        { name: "PostgREST", icon: "/icons/tech/postgresql.svg" },
-        { name: "Supabase", icon: "/icons/tech/supabase.svg" },
-        { name: "Cloudinary", icon: "/icons/tech/cloudinary.svg" }
+        { name: "Firebase", icon: "/icons/tech/firebase.svg" },
+        { name: "MQTT", icon: "/icons/tech/mqtt.svg" },
+        { name: "Tailwind CSS", icon: "/icons/tech/tailwindcss.svg" }
       ],
       image: "/smartfood_ai.jpg",
-      demoLink: "https://github.com/duyaivy/smart-food",
+      demoLink: "https://youtu.be/ZgGcTy55q7k",
       githubLinks: [
         {
           label: "Mobile App",
@@ -127,30 +174,26 @@ export const portfolioData = {
       ]
     },
     {
-      id: 2,
+      id: 3,
       name: "VietFood Restaurant",
-      period: "Jan 2026 - Apr 2026",
-      overview: `VietFood is a restaurant management platform for customer ordering, real-time service tracking, and business operations. Customers can browse menus, place orders, follow dish status, use an AI chatbot for support, and complete payments through VNPay. Admin users can manage menu items, staff, revenue, orders, notifications, multilingual content, SEO, and customer insights from a centralized dashboard.`,
+      period: "Mar 2026 - Jun 2026",
+      overview: `Full-stack restaurant platform covering end-to-end dining and business management:
+• Seamless customer ordering flow, table status, and VNPay online payment.
+• Real-time order & kitchen status synchronization using Socket.IO and Redis.
+• AI customer assistant with Vietnamese/English TTS playback and admin operations dashboard.`,
       teamSize: "2 contributors",
       role: "Fullstack developer",
       tech: [
         { name: "Next.js", icon: "/icons/tech/nextjs.svg" },
         { name: "React.js", icon: "/icons/tech/react.svg" },
-        { name: "Zustand", icon: "/icons/tech/zustand.svg" },
-        { name: "Shadcn UI", icon: "/icons/tech/shadcnui.svg" },
-        { name: "React i18n", icon: "/icons/tech/reacti18n.svg" },
-        { name: "Lucide React", icon: "/icons/tech/lucide-react.svg" },
-        { name: "Next Theme", icon: "/icons/tech/nextjs.svg" },
-        { name: "Socket.io", icon: "/icons/tech/socketio.svg" },
-        { name: "Tailwind CSS", icon: "/icons/tech/tailwindcss.svg" },
         {
-          name: "Python Django REST Framework",
+          name: "Django REST Framework",
           icon: "/icons/tech/python.svg"
         },
-        { name: "OpenAI", icon: "/icons/tech/openai.svg" },
+        { name: "Socket.IO", icon: "/icons/tech/socketio.svg" },
         { name: "Redis", icon: "/icons/tech/redis.svg" },
-        { name: "JWT", icon: "/icons/tech/jwt.svg" },
-        { name: "Google Cloud Translate", icon: "/icons/tech/google-cloud.svg" }
+        { name: "OpenAI", icon: "/icons/tech/openai.svg" },
+        { name: "Tailwind CSS", icon: "/icons/tech/tailwindcss.svg" }
       ],
       image: "/vietfood.jpg",
       demoLink: "https://restaurant.duyaivy.id.vn/",
@@ -168,10 +211,12 @@ export const portfolioData = {
       ]
     },
     {
-      id: 3,
+      id: 4,
       name: "MineSweeper AI",
       period: "Mar 2026",
-      overview: `MineSweeper AI is a Minesweeper game project that explores AI-assisted and automated gameplay. It combines classic game mechanics with rule-based reasoning and machine learning models to predict safe moves, suggest hints, and complete boards automatically. The project focuses on practical AI decision-making in an interactive real-time game environment.`,
+      overview: `Interactive Minesweeper game exploring AI-assisted and automated gameplay:
+• Classic game mechanics paired with machine learning and rule-based decision trees.
+• Predicts safe moves, recommends hints, and solves board configurations in real time.`,
       teamSize: "Personal project",
       role: "Game and AI developer",
       tech: [
@@ -199,8 +244,29 @@ export const portfolioData = {
     personalNote:
       "That mindset follows me into software: stay disciplined, keep improving, and do the work even when the result is not immediate. I try to build products with the same attitude: clear purpose, strong execution, and no shortcuts."
   },
+  certifications: [
+    {
+      title: "Academic Encouragement Scholarship DUT",
+      period: "Semester 2, 2024–2025",
+      issuer: "Da Nang University of Science and Technology",
+      detail: "Semester GPA 9.26 / 10"
+    },
+    {
+      title: "TOEIC Listening & Reading",
+      period: "Jun 2026",
+      issuer: "IIG / ETS",
+      detail: "Score 815 / 990"
+    },
+    {
+      title: "Google for Education - Gemini Certified Student",
+      period: "Feb 2026",
+      issuer: "Google for Education",
+      detail: "Gemini Certified"
+    }
+  ],
   contact: {
-    email: "duyaivy.dev@gmail.com",
+    email: "quocduy0322@gmail.com",
+    phone: "0979.783.396",
     github: "https://github.com/duyaivy",
     linkedin: "https://linkedin.com/in/duyaivy"
   }
@@ -234,6 +300,7 @@ export const projects = portfolioData.projects.map((p) => ({
   image: p.image,
   links: { github: p.githubLinks, live: p.demoLink }
 }));
+export const certifications = portfolioData.certifications;
 export const theatreOfDreams = {
   bannerImage: portfolioData.theatreOfDreams.bannerImage,
   theme: "Manchester United: Never Gonna Stop",

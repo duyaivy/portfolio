@@ -62,7 +62,7 @@ export default function ProjectList() {
                   <span className="text-primary font-bold text-xs tracking-widest">{(index + 1).toString().padStart(2, '0')}</span>
                 </div>
 
-                <p className="text-gray-400 text-sm leading-relaxed mb-6 line-clamp-3">
+                <p className="text-gray-400 text-sm leading-relaxed mb-6 line-clamp-3 whitespace-pre-line">
                   {project.description}
                 </p>
 

@@ -24,10 +24,13 @@ export interface IProject {
 }
 
 export interface IExperience {
-  company: string;
+  company?: string;
+  organization?: string;
+  organizationUrl?: string;
   role: string;
   period: string;
   description: string;
+  bullets?: string[];
 }
 
 export interface ISkill {

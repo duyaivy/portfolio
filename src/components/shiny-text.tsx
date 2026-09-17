@@ -15,7 +15,7 @@ export default function ShinyText({
 
   return (
     <div
-      className={`inline-block bg-clip-text text-[#b5b5b5a4] ${
+      className={`inline-block bg-clip-text text-[#b5b5b5a4] whitespace-pre-line ${
         disabled ? "" : "animate-shine"
       } ${className}`}
       style={{
